@@ -17,6 +17,7 @@ h4{
     margin-left: 20px;
     margin-right: 20px;
     border-radius: 15px;
+    
 }
 
 figure{
@@ -48,3 +49,9 @@ figcaption{
     font-size: 30px;
     color: #f8f8f8;
 }
+
+h3{
+    text-align: center;
+    position: relative;
+    top: 125px;
+}	

@@ -8,7 +8,7 @@ body{
     position: relative;
     bottom: 20px;
     padding-bottom: 30px;
-    border-bottom: #f8f8f8 8px solid;
+    border-bottom: hwb(49 2% 4%) 8px solid;
     border-left: #f8f8f8 8px solid;
     border-radius: 15px;
 }
