@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(14, 13, 13) ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #f8f8f8;
+}
+
+#headerCont{
+    position: relative;
+    bottom: 20px;
+    padding-bottom: 30px;
+    border-bottom: #f8f8f8 8px solid;
+    border-left: #f8f8f8 8px solid;
+    border-radius: 15px;
+}
+
+h1{
+    position: relative;
+    font-size: 36px;
+    top: 10px;
+    left: 10px;
+}
