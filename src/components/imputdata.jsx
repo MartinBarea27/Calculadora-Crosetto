@@ -1,67 +1,144 @@
-import React from 'react'
-import Almacen from '../assets/Almacen.jpg'
-import '../css/imputdata.css'
+import React, { useState, useEffect } from 'react';
+import Almacen from '../assets/Almacen.jpg';
+import cargaSup from '../assets/cargaSup.svg';
+import '../css/imputdata.css';
 
 export default function Imputdata() {
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
+  const [tableData, setTableData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const data = [];
+
+    for (let i = 0; i < height + 1; i++) {
+      const rowData = [];
+      for (let j = 0; j < width; j++) {
+        rowData.push(i * width + j + 1);
+      }
+      data.push(rowData);
+    }
+
+    setTableData(data);
+    setShowModal(true);
+  };
+
+  const renderTable = () => {
+    const middleRowIndex = Math.floor(height / 2);
+    const topRows = tableData.slice(0, middleRowIndex);
+    const bottomRows = tableData.slice(middleRowIndex + 1);
+
+    return (
+      <div>
+        <div className="table-container">
+          <table>
+            <tbody>
+              {topRows.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <td key={cellIndex}>
+                      <img src={cargaSup} alt={cargaSup} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="transSup">
+          <img src={'https://crosettowarehouser.com.ar/img/transSup.svg'} alt={'transSup'} />
+        </div>
+
+        <div className="table-container">
+          <table>
+            <tbody>
+              {bottomRows.map((row, rowIndex) => (
+                <tr key={rowIndex + middleRowIndex + 1}>
+                  {row.map((cell, cellIndex) => (
+                    <td key={cellIndex}>
+                      <img src={cargaSup} alt={cargaSup} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
+
   return (
-
-<div className='container-fluid' >
-    <div className='row m-5'>
-        <div className='col-3 text-center'>
-            <h1>Dimensiones</h1>
-                <div class="form-group justify-content-center">
-                        <br />
-                    <label>Largo Total  [L<sub>T</sub>]</label>
-                        <input type="number" class="form-control" id="largo_m" placeholder="" value="50" data-index="1" />
-                    </div>
-                <div class="form-group colUno">
-                    <label>Ancho [W<sub>T</sub>]</label>
-                        <input type="number" class="form-control" id="ancho_m" placeholder="" value="14" data-index="2" />
-                    </div>
-                <div class="form-group colUno">
-                    <label>Alto [h<sub>T</sub>]</label>
-                        <input type="number" class="form-control" id="alto_m" placeholder="" value="18.00" data-index="3" />
-                    </div>
-                <div class="form-group colUno">
-                    <label>Alto de Pallet [h<sub>p</sub>]</label>
-                        <input type="number" class="form-control" id="altopallet_m" placeholder="" value="2.00" data-index="4" onfocusout="setPalletHeight('multi')" />
-                    </div>
-                <div class="buttonHolder colUno">
-                    <button id='bottonsCalc' onclick="calcularMultiprof(5); dibujarVistaFrontal('modalSimu'); dibujarVistaSuperior('modalSimu')" type="#" class="btn btn-primary" data-index="5"><b>Calcular</b></button>
-                </div>
+    <div className="container-fluid">
+      <div className="row m-5">
+        <div className="col-3 text-center" id='formulario'>
+          <form onSubmit={handleFormSubmit}>
+            <div className="form-group">
+              <label>Cantidad de calles<br /> </label>
+              <input
+                type="number"
+                className="form-control"
+                value={width}
+                onChange={(e) => setWidth(parseInt(e.target.value))}
+                max={26}
+              /> <br /> 
             </div>
-            
-        <div className='col-3 text-center'>
-            <h1>Unidades</h1>
-                <div class="form-group colDos rw2">
-                <br />
-                    <label>Calles</label>
-                        <input type="number" class="form-control" id="calles_m" placeholder="" value="1" data-index="6" />
-                    </div>
-
-                <div class="form-group colDos rw3">
-                    <label>Profundidades</label>
-                        <input type="number" class="form-control" id="profundidad_m" placeholder="" value="1" data-index="7" />
-                    </div>
-                <div class="form-group colDos rw4">
-                    <label>Niveles</label>
-                        <input type="number" class="form-control" id="niveles_m" placeholder="" value="1" data-index="8" />
-                    </div>
-                <div class="form-group colDos rw5">
-                    <label>Posiciones Totales</label>
-                        <input type="number" class="form-control" id="posiciones_m" placeholder="" value="1" readonly />
-                    </div>
-
-        <div class="buttonHolder colDos rw6">
-            <button id='bottonsCalc' onclick="calcularDimensionesMultiprof(0); dibujarVistaFrontal('modalSimu'); dibujarVistaSuperior('modalSimu')" type="#" class="btn btn-primary" data-index="9"><b>Calcular</b></button>
+            <div className="form-group">
+              <label>Cantidad de profundidades <br /> </label>
+              <input
+                type="number"
+                className="form-control"
+                value={height}
+                onChange={(e) => setHeight(parseFloat(e.target.value))}
+              /> <br /> 
+            </div>
+            <div className="form-group">
+              <label>Ancho de Pallet<br /> </label>
+              <input
+                type="number"
+                className="form-control"
+                //value={width}
+                //onChange={(e) => setWidth(parseInt(e.target.value))}
+                max={26}
+              /> <br /> 
+            </div>
+            <div className="form-group">
+              <label>Profundidad de Pallet<br /> </label>
+              <input
+                type="number"
+                className="form-control"
+                //value={width}
+                //onChange={(e) => setWidth(parseInt(e.target.value))}
+                max={26}
+              /> <br /> <br />
+            </div>
+            <button id='bottonsCalc' className='btn btn-primary' type="submit"><b>Generar tabla</b></button>
+          </form>
         </div>
-    </div>
-        <div className='col-6 text-center'>
-            <img id='almacen' src={Almacen} alt={Almacen} width={600} height={400} />
+        <div className='col-6'>
+          <img id='almacen' src={Almacen} alt={Almacen} width={910} height={500} />
         </div>
-
+      </div>
+        
+      {/* Modal */}
+      {showModal && (
+        <div className="modal fade show modal-lg" tabIndex="-1" aria-labelledby="exampleModalLabel" style={{ display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-content">
+              <div className="modal-body">
+                {renderTable()}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {showModal && <div className="modal-backdrop fade show"></div>}
     </div>
-</div>
-  )
-
+  );
 }

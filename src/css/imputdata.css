@@ -1,6 +1,6 @@
 #almacen{
     background-color: hwb(49 2% 4%);
-    padding: 5px;
+    padding: 3px;
     border-radius: 15px;
     box-shadow: 0px 0px 10px #000;
 }
@@ -10,5 +10,38 @@
     border: #000;
     color: #000;
     position: relative;
-    top: 40px;
+    top: 10px;
 }
+
+#tablaArriba{
+    background-color: rgb(156, 190, 206);
+}
+
+.pasilloCelda {
+        height: 4px;
+        background-color: black;
+        width: 5rem;
+    }
+
+#formulario{
+  position: relative;
+  top: 30px;
+}
+
+    .generated-table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+
+      .modal-content{
+        position: relative ;
+      }
+      
+      label{
+        font-size: 20px;
+      }
+      
